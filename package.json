@@ -1,15 +1,16 @@
 {
   "name": "coursework",
   "version": "1.0.0",
-  "description": "",
+  "description": "CM4025 Web Development coursework",
   "main": "index.js",
   "scripts": {
     "development": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
     "start": "NODE_ENV=production node ./dist/server.generated.js"
   },
-  "author": "",
+  "author": "Finlay Smith",
   "license": "ISC",
+  "homepage": "https://github.com/Fin1ay/EnterpriseWebDevCoursework.git",
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.1",
     "@material-ui/core": "^4.11.3",
@@ -38,7 +39,7 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^2.5.2"
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-react": "^7.12.13",
