@@ -2,7 +2,7 @@
   "name": "coursework",
   "version": "1.0.0",
   "description": "Coursework CM4025 Web Development",
-  "main": "index.js",
+  "main": "./dist/server.generated.js",
   "scripts": {
     "development": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
@@ -17,6 +17,7 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.6.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -44,7 +45,6 @@
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
-    "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
     "file-loader": "^6.2.0"
   }
