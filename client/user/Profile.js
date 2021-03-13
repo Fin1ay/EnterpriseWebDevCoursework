@@ -55,7 +55,7 @@ export default function Profile({ match }) {
     }
 
   }, [match.params.userId])
-  
+
     if (redirectToSignin) {
       return <Redirect to='/signin'/>
     }
@@ -83,7 +83,13 @@ export default function Profile({ match }) {
               </ListItemSecondaryAction>)
             }
           </ListItem>
-          <Divider/>
+          <ListItem>
+          	<ListItemText primary={user.about}/>
+          </ListItem>
+          <ListItem>
+          	<ListItemText primary={"Profile edits: " + user.profileclicks}/>
+          </ListItem>
+         <Divider/>
           <ListItem>
             <ListItemText primary={"Joined: " + (
               new Date(user.created)).toDateString()}/>

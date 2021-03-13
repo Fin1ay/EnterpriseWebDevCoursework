@@ -12,7 +12,8 @@ import Typography from '@material-ui/core/Typography'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import Person from '@material-ui/icons/Person'
 import {Link} from 'react-router-dom'
-import {list} from './api-user.js'
+import {listadmin} from './api-user.js'
+import auth from './../auth/auth-helper'
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -25,15 +26,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Users() {
+export default function Users({ match }) {
   const classes = useStyles()
   const [users, setUsers] = useState([])
+  const jwt = auth.isAuthenticated()
 
   useEffect(() => {
     const abortController = new AbortController()
     const signal = abortController.signal
 
-    list(signal).then((data) => {
+    listadmin({userId: match.params.userId}, {t: jwt.token}, signal).then((data) => {
       if (data && data.error) {
         console.log(data.error)
       } else {
@@ -46,7 +48,7 @@ export default function Users() {
     return function cleanup(){
       abortController.abort()
     }
-  }, [])
+  }, [match.params.userId])
 
 
     return (
@@ -64,6 +66,7 @@ export default function Users() {
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText primary={item.name}/>
+                      <ListItemText primary={"Administrator: " + item.admin}/>
                       <ListItemSecondaryAction>
                       <IconButton>
                           <ArrowForward/>

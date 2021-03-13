@@ -15,11 +15,30 @@ const create = async (user) => {
 }
 
 const list = async (signal) => {
+  console.log("listing the users")
   try {
     let response = await fetch('/api/users/', {
       method: 'GET',
       signal: signal,
     })
+    return await response.json()
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+const listadmin = async (params, credentials, signal) => {
+  console.log("listing the users for admin")
+  try {
+    let response = await fetch('/api/users/admin/' + params.userId, {
+      method: 'GET',
+      signal: signal,
+       headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + credentials.t
+      }
+   })
     return await response.json()
   } catch(err) {
     console.log(err)
@@ -79,6 +98,7 @@ const remove = async (params, credentials) => {
 export {
   create,
   list,
+  listadmin,
   read,
   update,
   remove
