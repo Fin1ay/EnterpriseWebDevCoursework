@@ -1,5 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import { pink } from '@material-ui/core/colors'
+
+
 const theme = createMuiTheme({
  typography: {
  useNextVariants: true,
@@ -22,4 +24,6 @@ const theme = createMuiTheme({
  type: 'light'
  }
  })
+
+
  export default theme
