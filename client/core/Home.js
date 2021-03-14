@@ -42,7 +42,7 @@ export default function Home(){
  </Typography>
  <CardMedia className={classes.media} image={myImg} title="My Image"/>
  <Typography variant="body2" component="p" className={classes.credit}
-color="textSecondary">Photo: Robin</Typography>
+color="textSecondary">Photo: Borderlands</Typography>
  <CardContent>
  <Typography variant="body1" component="p">
  Welcome A/B Testing home page.
