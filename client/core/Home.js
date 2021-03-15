@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
-import myImg from './../assets/images/borderlands.jpg'
+import myImg from './../assets/images/600x400.jpg'
 
 const useStyles = makeStyles(theme => ({
  card: {

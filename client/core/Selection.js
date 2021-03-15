@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
+import Grid from '@material-ui/core/Grid'
 import {Link} from 'react-router-dom'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
-import myImg from './../assets/images/borderlands.jpg'
+import myImg from './../assets/images/200x100.jpg'
 
 // create class
 class ImageGrid extends React.Component {
@@ -18,9 +19,9 @@ class ImageGrid extends React.Component {
                 {name:'Image 1',src:myImg,desc:'This describes this image..'},
                 {name:'Image 2',src:myImg,desc:'This describes this image 2..'},
                 {name:'Image 3',src:myImg,desc:'This describes this image 3 ..'},
-                {name:'Image 4',src:'//placeimg.com/600/400?text=4',desc:'This describes this image 4..'},
-                {name:'Image 5',src:'//placeimg.com/600/400?text=5',desc:'This describes this image 5..'},
-                {name:'Image 6',src:'//placeimg.com/600/400?text=6',desc:'This describes this image 6..'},
+                {name:'Image 4',src:myImg,desc:'This describes this image 4..'},
+                {name:'Image 5',src:myImg,desc:'This describes this image 5..'},
+                {name:'Image 6',src:myImg,desc:'This describes this image 6..'},
             ],
             currentSelection: {},
         };
@@ -37,7 +38,7 @@ class ImageGrid extends React.Component {
         this.setState({ currentSelection: val });
     }
 
-    hydrate(){
+    render(){
         var { images, currentSelection } = this.state;
         return(
         <div>
@@ -63,16 +64,6 @@ class ImageGrid extends React.Component {
     }
 };
 
-class App extends React.Component {
-  hydrate() {
-    return (
-    <div className="container-fluid py-3">
-        <h4 className="text-center font-weight-light text-light mb-3">React Gallery with Bootstrap</h4>
-        <ImageGrid />
-    </div>
-    )
-  }
-}
 
 
 const useStyles = makeStyles(theme => ({
@@ -101,21 +92,18 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export default function Grid(){
+export default function Selection(){
  const classes = useStyles()
  return (
- <Card className={classes.card}>
- <Typography variant="h6" className={classes.title}>
- Selection Page
-  </Typography>
-//initialise image grid
- <ImageGrid/>
- <CardContent>
-
- <Typography variant="body1" component="p">
- Welcome A/B Testing home page.
- </Typography>
- </CardContent>
- </Card>
+<Grid container>
+<Grid>
+  <Card>
+    <div className="container-fluid">
+        <h4 className="text-center font-weight-light text-light mb-3">React Gallery with Bootstrap</h4>
+        <ImageGrid />
+    </div>
+  </Card>
+ </Grid>
+ </Grid>
 )
 }
