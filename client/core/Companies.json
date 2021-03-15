@@ -1,0 +1,10 @@
+[
+  { "name": "Nasa", "image": "./../assets/images/borderlands.jpg"},
+  { "name": "Microsoft", "image": "./../assets/images/borderlands.jpg"},
+  { "name": "Phillips", "image": "./../assets/images/borderlands.jpg"},
+  { "name": "Fox", "image": "./../assets/images/borderlands.jpg"},
+  { "name": "Sony", "image": "./../assets/images/borderlands.jpg"},
+  { "name": "IBM", "image": "./../assets/images/borderlands.jpg"},
+  { "name": "Toshiba", "image": "./../assets/images/borderlands.jpg"},
+  { "name": "Volvo", "image": "./../assets/images/borderlands.jpg"}
+]
