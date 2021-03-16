@@ -14,7 +14,7 @@ import myImg from './../assets/images/borderlands.jpg'
 // // create class
 // class ImageGrid extends React.Component {
 //
-//     constructor(props) {
+//     constructor(props) { 
 //         super(props);
 //         this.state = {
 //             images: [
