@@ -1,3 +1,5 @@
+//if there is a problem with the user trying to access something they should not be
+//able to, redirect them to sign in page.
 import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import auth from './auth-helper'
