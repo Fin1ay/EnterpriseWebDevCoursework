@@ -1,11 +1,13 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
+import Grid from '@material-ui/core/Grid'
 import {Link} from 'react-router-dom'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
-import myImg from './../assets/images/600x400.jpg'
+import listCardImg from './../assets/images/borderlands.jpg'
+import gridCardImg from './../assets/images/600x400.jpg'
 
 const useStyles = makeStyles(theme => ({
  card: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles(theme => ({
  color: theme.palette.openTitle
  },
  media: {
- minHeight: 400
+ minHeight: 150
  },
  credit: {
  padding: 10,
@@ -36,18 +38,40 @@ const useStyles = makeStyles(theme => ({
 export default function Home(){
  const classes = useStyles()
  return (
+   <div className = {classes.root}>
+   <Grid container direction="column" alignContent='center' justify="center">
+   <Grid item md={4}>
  <Card className={classes.card}>
  <Typography variant="h6" className={classes.title}>
- Home Page
+ List
  </Typography>
- <CardMedia className={classes.media} image={myImg} title="My Image"/>
- <Typography variant="body2" component="p" className={classes.credit}
-color="textSecondary">Photo: Borderlands</Typography>
- <CardContent>
+ <Link to="/listselection">
+ <CardMedia className={classes.media} image={listCardImg} title="My Image"/>
+ </Link>
+<CardContent>
  <Typography variant="body1" component="p">
- Welcome A/B Testing home page.
+ Select products while viewing the page as a grid of items.
  </Typography>
  </CardContent>
  </Card>
+ </Grid>
+
+ <Grid item md={4}>
+<Card className={classes.card}>
+<Typography variant="h6" className={classes.title}>
+Grid
+</Typography>
+<Link to="/gridselection">
+<CardMedia className={classes.media} image={gridCardImg} title="My Image"/>
+</Link>
+<CardContent>
+<Typography variant="body1" component="p">
+Select products while viewing the page as a list of items.
+</Typography>
+</CardContent>
+</Card>
+</Grid>
+ </Grid>
+ </div>
  )
 }

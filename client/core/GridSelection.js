@@ -14,7 +14,7 @@ import myImg from './../assets/images/borderlands.jpg'
 // // create class
 // class ImageGrid extends React.Component {
 //
-//     constructor(props) { 
+//     constructor(props) {
 //         super(props);
 //         this.state = {
 //             images: [
@@ -110,7 +110,7 @@ const useStyles = makeStyles(theme => ({
  }
 }))
 
-export default function Selection(){
+export default function GridSelection(){
  const classes = useStyles()
  return (
 <Grid container spacing = {3}>
