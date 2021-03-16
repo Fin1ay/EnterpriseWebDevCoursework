@@ -39,7 +39,7 @@ export default function Home(){
  const classes = useStyles()
  return (
    <div className = {classes.root}>
-   <Grid container direction="column" alignContent='center' justify="center">
+   <Grid container direction="row" alignContent='center' justify="center">
    <Grid item md={4}>
  <Card className={classes.card}>
  <Typography variant="h6" className={classes.title}>

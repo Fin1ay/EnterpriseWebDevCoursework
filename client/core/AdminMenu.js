@@ -8,8 +8,12 @@ import Button from '@material-ui/core/Button'
 import auth from './../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
 import {listadmin} from './../user/api-user.js'
+import Paper from '@material-ui/core/Paper'
 
 
+
+export default function Menu({match}){
+  console.log("hello")
 
 const isActive = (history, path) => {
   if (history.location.pathname == path)
@@ -18,7 +22,6 @@ const isActive = (history, path) => {
     return {color: '#ffffff'}
 }
 const jwt = auth.isAuthenticated()
-console.log("hello")
 
 const Menu = withRouter(({history}) => (
   <AppBar position="static">
@@ -60,24 +63,25 @@ const Menu = withRouter(({history}) => (
               auth.clearJWT(() => history.push('/'))
             }}>Sign out</Button>
         </span>)
+      }
+      {
+        listadmin({userId: match.params.userId}, {t: jwt.token}, signal).then((data) => {
+          if (data && data.error) {
+          console.log(data.error)
+        } else {
+          (<span>
+            <Link to="/users">
+              <Button style={isActive(history, "/users")}>Users
+              </Button>
+            </Link>
+          </span>)
+        }
+      })
+      }
 
-      // {
-      //   listadmin({userId: match.params.userId}, {t: jwt.token}, signal).then((data) => {
-      //     if (data && data.error) {
-      //     console.log(data.error)
-      //   } else {
-      //     (<span>
-      //       <Link to="/users">
-      //         <Button style={isActive(history, "/users")}>Users
-      //         </Button>
-      //       </Link>
-      //     </span>)
-      //   }
-      // })
-    // }
-
-  }</Toolbar>
+  }
+  </Toolbar>
   </AppBar>
 ))
-
-export default Menu
+return Menu
+}
