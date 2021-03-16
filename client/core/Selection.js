@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
-import myImg from './../assets/images/200x100.jpg'
+import myImg from './../assets/images/borderlands.jpg'
 
 
 //Attempt at Image grid. Unsuccessful after full day of attempted adjustments
@@ -97,7 +97,7 @@ const useStyles = makeStyles(theme => ({
  color: theme.palette.openTitle
  },
  media: {
- minHeight: 400
+ minHeight: 100
  },
  credit: {
  padding: 10,
@@ -113,15 +113,137 @@ const useStyles = makeStyles(theme => ({
 export default function Selection(){
  const classes = useStyles()
  return (
-<Grid container spacing = {10}>
-<Grid>
-<Card className = {classes.card}>
-    <div className="container-fluid py-4">
-        <h4 className="text-center font-weight-light text-light mb-3">React Gallery with Bootstrap</h4>
-        <ImageGrid />
-    </div>
-  </Card>
- </Grid>
+<Grid container spacing = {4}>
+c <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
+ <Card className={classes.card}>
+ <Typography variant="h6" className={classes.title}>
+ Home Page
+ </Typography>
+ <CardMedia className={classes.media} image={myImg} title="My Image"/>
+ <Typography variant="body2" component="p" className={classes.credit}
+color="textSecondary">Photo: Borderlands</Typography>
+ <CardContent>
+ <Typography variant="body1" component="p">
+ Welcome A/B Testing home page.
+ </Typography>
+ </CardContent>
+ </Card>
  </Grid>
 )
 }

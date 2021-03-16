@@ -7,7 +7,6 @@ import HomeIcon from '@material-ui/icons/Home'
 import Button from '@material-ui/core/Button'
 import auth from './../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
-import Companies from './Companies'
 
 const isActive = (history, path) => {
   if (history.location.pathname == path)
