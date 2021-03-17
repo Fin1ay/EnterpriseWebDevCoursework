@@ -81,6 +81,30 @@ const update = async (req, res) => {
   }
 }
 
+const addToGrid = async (req, res) => {
+  try {
+    let user = req.GridSelection
+    user.gridclicks = user.gridclicks + 1
+    res.json(user)
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    })
+  }
+}
+
+const addToList = async (req, res) => {
+  try {
+    let user = req.ListSelection
+    user.listclicks = user.listclicks + 1
+    res.json(user)
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    })
+  }
+}
+
 const remove = async (req, res) => {
   try {
     let user = req.profile
@@ -102,5 +126,7 @@ export default {
   list,
   listadmin,
   remove,
-  update
+  update,
+  addToList,
+  addToGrid
 }

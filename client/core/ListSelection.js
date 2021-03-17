@@ -13,6 +13,7 @@ import ArrowForward from '@material-ui/icons/ArrowForward'
 import Person from '@material-ui/icons/Person'
 import {Link} from 'react-router-dom'
 import {list} from './../user/api-user.js'
+import myImg from './../assets/images/200x100.jpg'
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -64,11 +65,6 @@ export default function Users() {
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText primary={item.name}/>
-                      <ListItemSecondaryAction>
-                      <IconButton>
-                          <ArrowForward/>
-                      </IconButton>
-                      </ListItemSecondaryAction>
                     </ListItem>
                  </Link>
                })

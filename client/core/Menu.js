@@ -9,87 +9,62 @@ import auth from './../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
 import {listadmin} from './../user/api-user.js'
 
-
-
 const isActive = (history, path) => {
   if (history.location.pathname == path)
-    return {color: '#ff4081'}
+  return {color: '#ff4081'}
   else
-    return {color: '#ffffff'}
+  return {color: '#ffffff'}
 }
-const jwt = auth.isAuthenticated()
-console.log(jwt + "ASDASD")
-console.log("hello" + "asd")
 
 const Menu = withRouter(({history}) => (
   <AppBar position="static">
-    <Toolbar>
-      <Typography variant="h6" color="inherit">
-      Enterprise Web Development
-      </Typography>
-      <Link to="/">
-        <IconButton aria-label="Home" style={isActive(history, "/")}>
-          <HomeIcon/>
-        </IconButton>
+  <Toolbar>
+  <Typography variant="h6" color="inherit">
+  AutoMobile Storehouse
+  </Typography>
+  <Link to="/">
+  <IconButton aria-label="Home" style={isActive(history, "/")}>
+  <HomeIcon/>
+  </IconButton>
+  </Link>
+  {
+    //checks if user is not signed into account
+    !auth.isAuthenticated() && (<span>
+      <Link to="/signup">
+      <Button style={isActive(history, "/signup")}>Sign up
+      </Button>
       </Link>
-      {
-        !auth.isAuthenticated() && (<span>
-          <Link to="/signup">
-            <Button style={isActive(history, "/signup")}>Sign up
-            </Button>
-          </Link>
-          <Link to="/signin">
-            <Button style={isActive(history, "/signin")}>Sign In
-            </Button>
-          </Link>
+      <Link to="/signin">
+      <Button style={isActive(history, "/signin")}>Sign In
+      </Button>
+      </Link>
+      </span>)
+    }
+    {
+    //checks if user is signed in and is admin
+    auth.isAuthenticated() && auth.isAuthenticated().user.admin &&(<span>
+      <Link to={"/useradmin/" + auth.isAuthenticated().user._id}>
+      <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>All Users</Button>
+      </Link>
+      </span>)
+    }
+    {
+      //checks if user is signed in and is not admin
+      auth.isAuthenticated() && !auth.isAuthenticated().user.admin && (<span>
+        <Link to={"/user/" + auth.isAuthenticated().user._id}>
+        <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
+        </Link>
         </span>)
       }
       {
-        auth.isAuthenticated() && (<span>
-          <Link to={"/user/" + auth.isAuthenticated().user._id}>
-            <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
-          </Link>
-          <Button color="inherit" onClick={() => {
-              auth.clearJWT(() => history.push('/'))
-            }}>Sign out</Button>
-          // <Link to={"/useradmin/" + auth.isAuthenticated().user._id}>
-          //   <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>Admin Users</Button>
-          // </Link>
+      auth.isAuthenticated() && (<span>
+        <Button color="inherit" onClick={() => {
+          auth.clearJWT(() => history.push('/'))
+        }}>Sign out</Button>
         </span>)
-      }
+    }
+      </Toolbar>
+      </AppBar>
+    ))
 
-      {
-
-        auth.isAuthenticated() && auth.isAuthenticated().user.admin &&(<span>
-          <Link to={"/user/" + auth.isAuthenticated().user._id}>
-            <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
-          </Link>
-          <Link to={"/useradmin/" + auth.isAuthenticated().user._id}>
-          <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>WORKING</Button>
-          </Link>
-        </span>)
-
-
-
-
-
-      // {
-      //   listadmin({userId: match.params.userId}, {t: jwt.token}, signal).then((data) => {
-      //     if (data && data.error) {
-      //     console.log(data.error)
-      //   } else {
-      //     (<span>
-      //       <Link to="/users">
-      //         <Button style={isActive(history, "/users")}>Users
-      //         </Button>
-      //       </Link>
-      //     </span>)
-      //   }
-      // })
-    // }
-
-  }</Toolbar>
-  </AppBar>
-))
-
-export default Menu
+      export default Menu

@@ -6,6 +6,7 @@ import compress from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
 import Template from './../template'
+import productRoutes from './routes/product.routes'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 
@@ -21,8 +22,6 @@ import theme from './../client/theme'
 
 //comment out before building for production
 import devBundle from './devBundle'
-
-
 
 const app = express()
 const CURRENT_WORKING_DIR = process.cwd()
@@ -40,6 +39,7 @@ app.use(helmet())
 app.use(cors())
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
+app.use('/', productRoutes)
 app.use('/', userRoutes)
 app.use('/', authRoutes)
 

@@ -33,6 +33,16 @@ const UserSchema = new mongoose.Schema({
 		default: 0,
 		min:0
 	},
+	gridclicks:{
+		type: Number,
+		default: 0,
+		min:0
+	},
+	listclicks:{
+		type: Number,
+		default: 0,
+		min:0
+	},
   admin: {
   type: Boolean,
   default: false
