@@ -18,7 +18,8 @@ const isActive = (history, path) => {
     return {color: '#ffffff'}
 }
 const jwt = auth.isAuthenticated()
-console.log("hello")
+console.log(jwt + "ASDASD")
+console.log("hello" + "asd")
 
 const Menu = withRouter(({history}) => (
   <AppBar position="static">
@@ -51,10 +52,26 @@ const Menu = withRouter(({history}) => (
           <Button color="inherit" onClick={() => {
               auth.clearJWT(() => history.push('/'))
             }}>Sign out</Button>
+          // <Link to={"/useradmin/" + auth.isAuthenticated().user._id}>
+          //   <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>Admin Users</Button>
+          // </Link>
+        </span>)
+      }
+
+      {
+
+        auth.isAuthenticated() && auth.isAuthenticated().user.admin &&(<span>
+          <Link to={"/user/" + auth.isAuthenticated().user._id}>
+            <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
+          </Link>
           <Link to={"/useradmin/" + auth.isAuthenticated().user._id}>
-            <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>Admin Users</Button>
+          <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>WORKING</Button>
           </Link>
         </span>)
+
+
+
+
 
       // {
       //   listadmin({userId: match.params.userId}, {t: jwt.token}, signal).then((data) => {
