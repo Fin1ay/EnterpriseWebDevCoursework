@@ -51,14 +51,9 @@ const Menu = withRouter(({history}) => (
           <Button color="inherit" onClick={() => {
               auth.clearJWT(() => history.push('/'))
             }}>Sign out</Button>
-        </span>),
-        auth.isAuthenticated() && (<span>
           <Link to={"/useradmin/" + auth.isAuthenticated().user._id}>
-            <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>Admin Users?</Button>
+            <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>Admin Users</Button>
           </Link>
-          <Button color="inherit" onClick={() => {
-              auth.clearJWT(() => history.push('/'))
-            }}>Sign out</Button>
         </span>)
 
       // {
