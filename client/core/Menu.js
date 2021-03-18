@@ -27,6 +27,7 @@ const Menu = withRouter(({history}) => (
   <HomeIcon/>
   </IconButton>
   </Link>
+  <ul className="right">
   {
     //checks if user is not signed into account
     !auth.isAuthenticated() && (<span>
@@ -63,6 +64,7 @@ const Menu = withRouter(({history}) => (
         }}>Sign out</Button>
         </span>)
     }
+    </ul>
       </Toolbar>
       </AppBar>
     ))

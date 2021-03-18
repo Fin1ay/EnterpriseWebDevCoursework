@@ -44,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 
 function getVar(varString){
   var newValue = eval(varString)
+  return newValue
 }
 
 export default function ProductGrid({match}){
@@ -75,15 +76,20 @@ export default function ProductGrid({match}){
   return (
     <Grid container spacing = {0}>
     {products.map((item, i) => {
-      str = item.image
-      img = getVar(str)
+      //originally had item.image storing the file location. Did not work because
+      //the file location is changed to dist folder with random name once imported,
+      // img = item.image
+      //unable to get images from imports since eval is deemed unsafe by browser
+      // str = item.image
+      // img = getVar(str)
+
       return <Grid item md={4}>
       {console.log(str)}
       <Card className={classes.card}>
       <Typography variant="h6" className={classes.title}>
       {item.name}
       </Typography>
-      <CardMedia className={classes.media} image={img} title="My Image"/>
+      // <CardMedia className={classes.media} image={img} title="My Image"/>
       <CardContent>
       <Typography variant="body1" component="p">
       {item.price}
