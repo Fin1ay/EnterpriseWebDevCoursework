@@ -8,7 +8,14 @@ const ProductSchema = new mongoose.Schema({
 	},
 	description:{
 		type:String,
-		trim: true,
+		trim: true
+	},
+	price:{
+		type:Number,
+		trim: true
+	},
+	image:{
+		type:String,
 	}
 })
 

@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
  color: theme.palette.openTitle
  },
  media: {
-   minHeight: 500
+   minHeight: 500,
+   minWidth: 200
  },
  credit: {
  padding: 10,

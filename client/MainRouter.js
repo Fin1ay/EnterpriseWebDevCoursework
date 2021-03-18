@@ -7,6 +7,7 @@ import EditProfile from './user/EditProfile'
 import Profile from './user/Profile'
 import PrivateRoute from './auth/PrivateRoute'
 import UserAdmin from './user/UsersAdmin'
+import Product from './product/Product'
 import Menu from './core/Menu'
 import GridSelection from './core/GridSelection'
 import ListSelection from './core/ListSelection'
@@ -18,6 +19,7 @@ const MainRouter = () => {
         <Route exact path="/" component={Home}/>
         <Route path="/gridselection" component={GridSelection}/>
         <Route path="/listselection" component={ListSelection}/>
+        <Route path="/product" component={Product}/>
         <Route path="/signup" component={Signup}/>
         <Route path="/signin" component={Signin}/>
         <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>

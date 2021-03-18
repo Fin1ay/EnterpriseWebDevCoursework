@@ -23,7 +23,7 @@ const productByID = async (req, res, next, id) => {
 
 const list = async (req, res) => {
   try {
-    let products = await Product.find().select('name email updated created')
+    let products = await Product.find().select('name description price')
     res.json(products)
   } catch (err) {
     return res.status(400).json({
