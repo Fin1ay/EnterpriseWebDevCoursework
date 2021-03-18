@@ -56,7 +56,7 @@ export default function Home(){
     <Typography variant="h6" className={classes.title}>
     List
     </Typography>
-    <Link to="/listselection">
+    <Link to="/productlist">
     <CardMedia className={classes.media} image={listCardImg} title="My Image"/>
     </Link>
     <CardContent>
@@ -72,7 +72,7 @@ export default function Home(){
     <Typography variant="h6" className={classes.title}>
     Grid
     </Typography>
-    <Link to="/gridselection">
+    <Link to="/productgrid">
     <CardMedia className={classes.media} image={gridCardImg} title="My Image"/>
     </Link>
     <CardContent>

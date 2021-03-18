@@ -7,19 +7,17 @@ import EditProfile from './user/EditProfile'
 import Profile from './user/Profile'
 import PrivateRoute from './auth/PrivateRoute'
 import UserAdmin from './user/UsersAdmin'
-import Product from './product/Product'
+import ProductList from './product/ProductList'
+import ProductGrid from './product/ProductGrid'
 import Menu from './core/Menu'
-import GridSelection from './core/GridSelection'
-import ListSelection from './core/ListSelection'
 
 const MainRouter = () => {
     return (<div>
       <Menu/>
 	  <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/gridselection" component={GridSelection}/>
-        <Route path="/listselection" component={ListSelection}/>
-        <Route path="/product" component={Product}/>
+        <Route path="/productgrid" component={ProductGrid}/>
+        <Route path="/productlist" component={ProductList}/>
         <Route path="/signup" component={Signup}/>
         <Route path="/signin" component={Signin}/>
         <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>

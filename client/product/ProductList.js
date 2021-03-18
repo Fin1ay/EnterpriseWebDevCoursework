@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import Person from '@material-ui/icons/Person'
+import Divider from '@material-ui/core/Divider'
 import {Link} from 'react-router-dom'
 import {list} from './api-Product.js'
 import auth from './../auth/auth-helper'
@@ -60,10 +61,12 @@ export default function Products({ match }) {
          {products.map((item, i) => {
           return <Link to={"/product/" + item._id} key={i}>
                     <ListItem button>
-                      <ListItemText primary={item.name}/>
-                      <ListItemText primary={"Administrator: " + item.description}/>
+                    <ListItemText primary={item.name}/>
+                      <ListItem>
+                      <Divider />
+                      <ListItemText primary={"Description: " + item.description}/>
+                      </ListItem>
                       <ListItemText primary={"Price: £" + item.price}/>
-                      <ListItemAvatar primary={"Price: £" + item.price}/>
                     </ListItem>
                  </Link>
                })

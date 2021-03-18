@@ -42,7 +42,7 @@ const Menu = withRouter(({history}) => (
     }
     {
     //checks if user is signed in and is admin
-    auth.isAuthenticated() && auth.isAuthenticated().user.admin &&(<span>
+    (auth.isAuthenticated() && auth.isAuthenticated().user.admin) &&(<span>
       <Link to={"/useradmin/" + auth.isAuthenticated().user._id}>
       <Button style={isActive(history, "/useradmin/" + auth.isAuthenticated().user._id)}>All Users</Button>
       </Link>
@@ -50,7 +50,7 @@ const Menu = withRouter(({history}) => (
     }
     {
       //checks if user is signed in and is not admin
-      auth.isAuthenticated() && !auth.isAuthenticated().user.admin && (<span>
+      (auth.isAuthenticated() && !auth.isAuthenticated().user.admin) && (<span>
         <Link to={"/user/" + auth.isAuthenticated().user._id}>
         <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
         </Link>
