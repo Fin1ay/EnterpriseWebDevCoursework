@@ -26,63 +26,62 @@ const useStyles = makeStyles(theme => ({
   title: {
     margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px`,
     color: theme.palette.openTitle
-  }
+  },
 }))
 
 export default function Products({ match }) {
   var itemsArray = []
   //before the window is changed, the basket Data is stored locally in a string.
-  //not functioning, likely due to leaving page using menu bar. Basket button added
+  //not functioning, likely due to leaving page via menu bar. Basket button added
   //to page instead
   // window.addEventListener('beforeunload', (event) => {
-  //   sessionStorage.setItem('basketData', "HELLO")
-  //   console.log(sessionStorage.getItem('basketData'));
-  // });
+    //   sessionStorage.setItem('basketData', "HELLO")
+    //   console.log(sessionStorage.getItem('basketData'));
+    // });
 
-  const classes = useStyles()
-  const [products, setProducts] = useState([])
-  const jwt = auth.isAuthenticated()
-  //replace part of string at chosen index
-  String.prototype.replaceAt = function(index, replacement) {
+    const classes = useStyles()
+    const [products, setProducts] = useState([])
+    const jwt = auth.isAuthenticated()
+    //replace part of string at chosen index
+    String.prototype.replaceAt = function(index, replacement) {
       return this.substr(0, index) + replacement;
-  }
-
-  useEffect(() => {
-    const abortController = new AbortController()
-    const signal = abortController.signal
-
-    list(signal).then((data) => {
-      if (data && data.error) {
-        console.log(data.error)
-      } else {
-        console.log("Here is the product data")
-        console.log(data)
-        setProducts(data)
-      }
-    })
-
-    return function cleanup(){
-      abortController.abort()
     }
-  }, [match.params.productId])
 
+    useEffect(() => {
+      const abortController = new AbortController()
+      const signal = abortController.signal
 
-  return (
-    <Paper className={classes.root} elevation={4}>
-    <Typography variant="h6" className={classes.title}>
-    All Products ({products.length})
-    </Typography>
-    <List dense>
-    {products.map((item, i) => {
-      return (
-        //when user clicks on product, is added to array of items acting as basket.
-        <ListItem button onClick = {()=>{
-          var isThere = false;
-          //checks if item is in array
-          for (var i=0; i<itemsArray.length; i++){
-            //if item is found, add 1 to quantity at end of number
-            if (itemsArray[i].includes(item.name)) {
-              isThere = true
+      list(signal).then((data) => {
+        if (data && data.error) {
+          console.log(data.error)
+        } else {
+          console.log("Here is the product data")
+          console.log(data)
+          setProducts(data)
+        }
+      })
+
+      return function cleanup(){
+        abortController.abort()
+      }
+    }, [match.params.productId])
+
+    return (
+      <Paper className={classes.root} elevation={4}>
+      <Typography variant="h6" className={classes.title}>
+      All Products ({products.length})
+      </Typography>
+      <List dense>
+      {products.map((item, i) => {
+        return (
+          //when user clicks on product, is added to array of items acting as basket.
+          <ListItem button onClick = {()=>{
+            var isThere = false;
+            //checks if item is in array
+            for (var i=0; i<itemsArray.length; i++){
+              //if item is found, add 1 to quantity at end of number
+              if (itemsArray[i].includes(item.name)) {
+                isThere = true
                 var pos = item.name.length
                 var newNumber = parseInt(itemsArray[i].charAt(pos))+1
                 console.log(newNumber)
@@ -91,34 +90,38 @@ export default function Products({ match }) {
                 itemsArray.splice(i,1,a)
                 console.log(a);
 
+              }
             }
-          }
-          //if item is not found, add instance as well as "1" to signify quantity
-          if (isThere === false) {
-            itemsArray.push(item.name+"1")
-            console.log(itemsArray);
-          }
-        }}>
-        <ListItemText primary={item.name}/>
-        <ListItem>
-        <Divider />
-        <ListItemText primary={"Description: " + item.description}/>
-        </ListItem>
-        <ListItemText primary={"Price: £" + item.price}/>
-        </ListItem>)
-      })
-    }
-    <Link to="/basket">
-    <Button onClick = {()=>{
-      //sets variables that are available across all pages in session
-      sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
-      sessionStorage.setItem('fromGrid', false)
-      sessionStorage.setItem('fromList', true)
-    }} >
-    Basket </Button>
-    </Link>
+            //if item is not found, add instance as well as "1" to signify quantity
+            if (isThere === false) {
+              itemsArray.push(item.name+"1")
+              console.log(itemsArray);
+            }
+          }}>
+          <ListItemText primary={item.name}/>
+          <ListItem>
+          <Divider />
+          <ListItemText primary={"Description: " + item.description}/>
+          </ListItem>
+          <ListItemText primary={"Price: £" + item.price}/>
+          </ListItem>)
+        })
+      }
+      <Link to="/basket">
+      <Button onClick = {()=>{
+        try{
+        //sets variables that are available across all pages in session
+        sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
+        sessionStorage.setItem('fromGrid', false)
+        sessionStorage.setItem('fromList', true)
+      }catch(err){
+        
+      }
+      }} >
+      Basket </Button>
+      </Link>
 
-    </List>
-    </Paper>
-  )
-}
+      </List>
+      </Paper>
+    )
+  }

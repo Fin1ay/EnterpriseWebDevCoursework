@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
@@ -9,8 +9,13 @@ import Typography from '@material-ui/core/Typography'
 import listCardImg from './../assets/images/borderlands.jpg'
 import gridCardImg from './../assets/images/600x400.jpg'
 import backgroundImg from './../assets/images/background image.jpg'
-
-
+import Paper from '@material-ui/core/Paper'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import {list} from './../product/api-Product.js'
+import Divider from '@material-ui/core/Divider'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -37,11 +42,36 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Home(){
-  const classes = useStyles()
+export default function Basket( {match} ){
 
-  //get basket from session storage and format it
+  const classes = useStyles()
+  //get product data
+  const [products, setProducts] = useState([])
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    list(signal).then((data) => {
+      if (data && data.error) {
+        console.log(data.error)
+      } else {
+        console.log("Here is the product data")
+        console.log(data)
+        setProducts(data)
+      }
+    })
+
+    return function cleanup(){
+      abortController.abort()
+    }
+  }, [match.params.productId])
+
+  //get basket from session storage and format it from string into array
+  try{
   var basketString = sessionStorage.getItem('basketData')
+}catch(err){
+  var basketString = "error1"
+}
   console.log(basketString);
   var basketArray = basketString.split(',')
   //clean array entries
@@ -50,21 +80,66 @@ export default function Home(){
   }
   console.log(basketArray);
 
+  var quantity = []
+  //remove final character from formatted string and add to array to track
+  //quantity being ordered
+  for (var i = 0; i < basketArray.length; i++) {
+    var lastChar = basketArray[i].length-1
+    // console.log(lastChar);
+    var finalCharacter = basketArray[i].charAt(lastChar)
+    // console.log(finalCharacter);
+    quantity.push(finalCharacter)
+    basketArray[i] = basketArray[i].slice(0,-1)
+  }
+  console.log(basketArray);
+  //find number of items by parsing quantity
+  var numberOfItems = 0
+  for (var i = 0; i < quantity.length; i++) {
+    numberOfItems += parseInt(quantity[i])
+  }
+
+  //total price for basket
+  var totalPrice = 0
 
   return (
-    <Grid>
-    <Grid item md={4}>
-    <Card className={classes.card}>
+    <Paper className={classes.root} elevation={4}>
     <Typography variant="h6" className={classes.title}>
-    Grid
+    Basket ({numberOfItems})
     </Typography>
-    <CardContent>
-    <Typography variant="body1" component="p">
-    Select products while viewing the page as a grid of items.
-    </Typography>
-    </CardContent>
-    </Card>
-    </Grid>
-    </Grid>
+    <List dense>
+    {products.map((item, i) => {
+      {
+        for (var i = 0; i < basketArray.length; i++) {
+          var compare = item.name.replace(/\W/g, '')
+          //compare the item name to the value passed from basket
+          if (basketArray[i].localeCompare(compare) === 0) {
+            //for each item in basket,check if they match the name of items in the
+            //products database. If they do, add them to list
+            return(
+              <div>
+              <Divider/>
+              <ListItemText primary={"Model: "+item.name + "\t Price: £"+ item.price +  "\t Quantity: " + quantity[i]}/>
+              Running total: £{Math.round((totalPrice+=(item.price*quantity[i]))*100)/100}
+              <Divider/>
+              </div>
+            )
+          }
+        }
+      }
+    }
   )
+}
+
+<ListItemText primary={"Total Price: £" + Math.round((totalPrice)*100)/100}/>
+<Button onClick = {()=>{
+  try{
+  //sets variables that are available across all pages in session
+  sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
+  sessionStorage.setItem('fromGrid', false)
+  sessionStorage.setItem('fromList', true)
+}catch(err){}
+}} />
+</List>
+</Paper>
+)
 }

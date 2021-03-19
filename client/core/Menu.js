@@ -16,6 +16,7 @@ const isActive = (history, path) => {
   return {color: '#ffffff'}
 }
 
+//nav bar which changes depending on who is signed in or not.
 const Menu = withRouter(({history}) => (
   <AppBar position="static">
   <Toolbar>
@@ -58,6 +59,7 @@ const Menu = withRouter(({history}) => (
         </span>)
       }
       {
+        //checks if user is signed in
       auth.isAuthenticated() && (<span>
         <Button color="inherit" onClick={() => {
           auth.clearJWT(() => history.push('/'))

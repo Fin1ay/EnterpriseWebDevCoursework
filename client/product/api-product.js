@@ -1,3 +1,4 @@
+//allow user to list all products
 const list = async (signal) => {
   console.log("listing the products")
   try {

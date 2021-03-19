@@ -10,7 +10,7 @@ import listCardImg from './../assets/images/borderlands.jpg'
 import gridCardImg from './../assets/images/600x400.jpg'
 import backgroundImg from './../assets/images/background image.jpg'
 
-let basket = [{id:1,name:"GalaxyA12",quantity:4},{id:2,name:"GalaxyA12",quantity:1}]
+
 const useStyles = makeStyles(theme => ({
   card: {
     margin: 'auto',
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-
+//home page which allows users to select type of layout they want to view
 export default function Home(){
   const classes = useStyles()
   return (
@@ -56,7 +56,7 @@ export default function Home(){
     <Typography variant="h6" className={classes.title}>
     List
     </Typography>
-    <Link to={{pathname:"/productlist", state: basket}}>
+    <Link to="/productlist">
     <CardMedia className={classes.media} image={listCardImg} title="My Image"/>
     </Link>
     <CardContent>
