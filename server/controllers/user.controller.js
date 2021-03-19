@@ -43,7 +43,7 @@ const read = (req, res) => {
 
 const list = async (req, res) => {
   try {
-    let users = await User.find().select('name email updated created ')
+    let users = await User.find().select('name email updated created listclicks gridclicks')
     res.json(users)
   } catch (err) {
     return res.status(400).json({
@@ -54,7 +54,7 @@ const list = async (req, res) => {
 
 const listadmin = async (req, res) => {
   try {
-    let users = await User.find().select('name email about updated created admin')
+    let users = await User.find().select('name email about updated created admin listclicks gridclicks')
     res.json(users)
   } catch (err) {
     return res.status(400).json({
@@ -86,7 +86,6 @@ const addToGrid = async (req, res) => {
     let user = req.profile
     user = extend(user, req.body)
     user.gridclicks = user.gridclicks + 1
-    // let quantity = req.user
     await user.save()
     res.json(user)
   } catch (err) {
@@ -101,7 +100,6 @@ const addToList = async (req, res) => {
     let user = req.profile
     user = extend(user, req.body)
     user.listclicks = user.listclicks + 1
-    // let quantity = req.user
     await user.save()
     res.json(user)
   } catch (err) {

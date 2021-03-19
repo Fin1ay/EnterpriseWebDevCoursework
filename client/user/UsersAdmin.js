@@ -26,6 +26,11 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+
+var totalGridClicks=0
+var totalListClicks=0
+
+
 export default function Users({ match }) {
   const classes = useStyles()
   const [users, setUsers] = useState([])
@@ -58,6 +63,10 @@ export default function Users({ match }) {
         </Typography>
         <List dense>
          {users.map((item, i) => {
+
+            totalGridClicks+=item.gridclicks
+            totalListClicks+=item.listclicks
+
           return <Link to={"/user/" + item._id} key={i}>
                     <ListItem button>
                       <ListItemAvatar>
@@ -66,7 +75,9 @@ export default function Users({ match }) {
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText primary={item.name}/>
-                      <ListItemText primary={"Administrator: " + item.admin}/>
+                      <ListItemText primary={"Administrator: " + item.admin +
+                      " Grid purchases: " + item.gridclicks + " List purchases: " +
+                    item.listclicks}/>
                       <ListItemSecondaryAction>
                       <IconButton>
                           <ArrowForward/>
@@ -76,7 +87,11 @@ export default function Users({ match }) {
                  </Link>
                })
              }
+
+             <ListItemText primary={"Combined list purchases for users: "+ totalListClicks}/>
+             <ListItemText primary={"Combined grid purchases for users: "+ totalGridClicks}/>
         </List>
+
       </Paper>
     )
 }

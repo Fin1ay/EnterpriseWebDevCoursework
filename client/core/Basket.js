@@ -132,13 +132,19 @@ export default function Basket( {match} ){
 
 <ListItemText primary={"Total Price: £" + Math.round((totalPrice)*100)/100}/>
 <Button onClick = {()=>{
+
+
+}} >
+Confirm </Button>
+<Link to = '/'>
+<Button onClick = {()=>{
   try{
-  //sets variables that are available across all pages in session
-  sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
-  sessionStorage.setItem('fromGrid', false)
-  sessionStorage.setItem('fromList', true)
-}catch(err){}
-}} />
+    sessionStorage.removeItem('basketData')
+  }catch(err){}
+}} >
+Empty Basket and Return to Menu
+</Button>
+</Link>
 </List>
 </Paper>
 )

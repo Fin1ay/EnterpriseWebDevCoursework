@@ -95,11 +95,50 @@ const remove = async (params, credentials) => {
   }
 }
 
+
+//attempting to create methods that will add to grid and list in user profiles
+//based on the update method 
+const addToGrid = async (params, credentials, user) => {
+  try {
+    let response = await fetch('/api/users/' + params.userId, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + credentials.t
+      },
+      body: JSON.stringify(user)
+    })
+    return await response.json()
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+const addToList = async (params, credentials, user) => {
+  try {
+    let response = await fetch('/api/users/' + params.userId, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + credentials.t
+      },
+      body: JSON.stringify(user)
+    })
+    return await response.json()
+  } catch(err) {
+    console.log(err)
+  }
+}
+
 export {
   create,
   list,
   listadmin,
   read,
   update,
-  remove
+  remove,
+  addToList,
+  addToGrid
 }
