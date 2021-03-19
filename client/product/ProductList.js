@@ -16,6 +16,7 @@ import {Link} from 'react-router-dom'
 import {list} from './api-Product.js'
 import auth from './../auth/auth-helper'
 
+
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
     padding: theme.spacing(1),
@@ -27,10 +28,17 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+
+
 export default function Products({ match }) {
+  var itemsArray = []
+  window.onbeforeunload=sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
   const classes = useStyles()
   const [products, setProducts] = useState([])
   const jwt = auth.isAuthenticated()
+
+  const [basket, setBasket] = useState([])
+
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -40,8 +48,8 @@ export default function Products({ match }) {
       if (data && data.error) {
         console.log(data.error)
       } else {
-      	console.log("Here is the product data")
-      	console.log(data)
+        console.log("Here is the product data")
+        console.log(data)
         setProducts(data)
       }
     })
@@ -52,26 +60,32 @@ export default function Products({ match }) {
   }, [match.params.productId])
 
 
-    return (
-      <Paper className={classes.root} elevation={4}>
-        <Typography variant="h6" className={classes.title}>
-          All Products ({products.length})
-        </Typography>
-        <List dense>
-         {products.map((item, i) => {
-          return <Link to={"/product/" + item._id} key={i}>
-                    <ListItem button>
-                    <ListItemText primary={item.name}/>
-                      <ListItem>
-                      <Divider />
-                      <ListItemText primary={"Description: " + item.description}/>
-                      </ListItem>
-                      <ListItemText primary={"Price: £" + item.price}/>
-                    </ListItem>
-                 </Link>
-               })
-             }
-        </List>
-      </Paper>
-    )
+  return (
+    <Paper className={classes.root} elevation={4}>
+    <Typography variant="h6" className={classes.title}>
+    All Products ({products.length})
+    </Typography>
+    <List dense>
+    {products.map((item, i) => {
+      return (
+        <ListItem button onClick = {()=>{
+          if(itemsArray.has(item.name)){
+            itemsArray.set(item.name, (itemsArray.get(item.name) + 1))
+            console.log(itemsArray);
+          }else{
+            itemsArray.set(item.name, 1)
+          }
+        }}>
+        <ListItemText primary={item.name}/>
+        <ListItem>
+        <Divider />
+        <ListItemText primary={"Description: " + item.description}/>
+        </ListItem>
+        <ListItemText primary={"Price: £" + item.price}/>
+        </ListItem>)
+      })
+    }
+    </List>
+    </Paper>
+  )
 }

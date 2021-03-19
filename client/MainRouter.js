@@ -10,12 +10,14 @@ import UserAdmin from './user/UsersAdmin'
 import ProductList from './product/ProductList'
 import ProductGrid from './product/ProductGrid'
 import Menu from './core/Menu'
+import Basket from './core/Basket'
 
 const MainRouter = () => {
     return (<div>
       <Menu/>
 	  <Switch>
         <Route exact path="/" component={Home}/>
+        <Route exact path="/basket" component={Basket}/>
         <Route path="/productgrid" component={ProductGrid}/>
         <Route path="/productlist" component={ProductList}/>
         <Route path="/signup" component={Signup}/>
