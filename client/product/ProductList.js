@@ -28,8 +28,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-
-
 export default function Products({ match }) {
   var itemsArray = []
   window.onbeforeunload=sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
@@ -39,6 +37,10 @@ export default function Products({ match }) {
 
   const [basket, setBasket] = useState([])
 
+  //replace part of string at chosen index
+  String.prototype.replaceAt = function(index, replacement) {
+      return this.substr(0, index) + replacement;
+  }
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -69,11 +71,23 @@ export default function Products({ match }) {
     {products.map((item, i) => {
       return (
         <ListItem button onClick = {()=>{
-          if(itemsArray.has(item.name)){
-            itemsArray.set(item.name, (itemsArray.get(item.name) + 1))
+          var isThere = false;
+          for (var i=0; i<itemsArray.length; i++){
+            if (itemsArray[i].includes(item.name)) {
+              isThere = true
+                var pos = item.name.length
+                var newNumber = parseInt(itemsArray[i].charAt(pos))+1
+                console.log(newNumber)
+                console.log(pos)
+                var a = itemsArray[i].replaceAt(pos, newNumber)
+                itemsArray.splice(i,1,a)
+                console.log(a);
+
+            }
+          }
+          if (isThere === false) {
+            itemsArray.push(item.name+"1")
             console.log(itemsArray);
-          }else{
-            itemsArray.set(item.name, 1)
           }
         }}>
         <ListItemText primary={item.name}/>

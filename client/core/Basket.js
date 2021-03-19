@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
       color: '#3f4771'
     }
   }
-}))
+})) 
 
 export default function Home(){
   const classes = useStyles()
