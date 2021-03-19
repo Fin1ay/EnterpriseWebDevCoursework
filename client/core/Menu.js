@@ -59,9 +59,6 @@ const Menu = withRouter(({history}) => (
       }
       {
       auth.isAuthenticated() && (<span>
-        <Link to={"/basket/"}>
-        <Button style={isActive(history, "/basket/" + auth.isAuthenticated().user._id)}>Basket</Button>
-        </Link>
         <Button color="inherit" onClick={() => {
           auth.clearJWT(() => history.push('/'))
         }}>Sign out</Button>

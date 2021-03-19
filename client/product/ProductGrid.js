@@ -12,6 +12,8 @@ import {list} from './api-Product.js'
 // import {list} from './api-Product.js'
 import galaxyA12 from './../assets/images/GalaxyA12.jpg'
 import iPhone11 from './../assets/images/iPhone12.jpg'
+import Button from '@material-ui/core/Button'
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -46,8 +48,12 @@ function getVar(varString){
   var newValue = eval(varString)
   return newValue
 }
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substr(0, index) + replacement;
+}
 
 export default function ProductGrid({match}){
+  var itemsArray = []
   const [products, setProducts] = useState([])
   const classes = useStyles()
   var img = './../assets/images/GalaxyA12.jpg'
@@ -94,11 +100,45 @@ export default function ProductGrid({match}){
       <Typography variant="body1" component="p">
       {item.price}
       </Typography>
+      //when user clicks on product, is added to array of items acting as basket.
+      <Button onClick = {()=>{
+        var isThere = false;
+        //checks if item is in array
+        for (var i=0; i<itemsArray.length; i++){
+          //if item is found, add 1 to quantity at end of number
+          if (itemsArray[i].includes(item.name)) {
+            isThere = true
+              var pos = item.name.length
+              var newNumber = parseInt(itemsArray[i].charAt(pos))+1
+              console.log(newNumber)
+              console.log(pos)
+              var a = itemsArray[i].replaceAt(pos, newNumber)
+              itemsArray.splice(i,1,a)
+              console.log(a);
+
+          }
+        }
+        //if item is not found, add instance as well as "1" to signify quantity
+        if (isThere === false) {
+          itemsArray.push(item.name+"1")
+          console.log(itemsArray);
+        }
+      }}>Add Item
+      </Button>
       </CardContent>
       </Card>
       </Grid>
     })
   }
+  <Link to="/basket">
+  <Button onClick = {()=>{
+    //sets variables that are available across all pages in session
+    sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
+    sessionStorage.setItem('fromGrid', true)
+    sessionStorage.setItem('fromList', false)
+  }} >
+  Basket </Button>
+  </Link>
     </Grid>
   )
 }

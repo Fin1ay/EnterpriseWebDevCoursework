@@ -35,50 +35,29 @@ const useStyles = makeStyles(theme => ({
       color: '#3f4771'
     }
   }
-})) 
+}))
 
 export default function Home(){
   const classes = useStyles()
 
-  let a = new Map(sessionStorage.getItem('basketData'))
-  const iterator = a.entries();
-  console.log(iterator.next().value);
+  //get basket from session storage and format it
+  var basketString = sessionStorage.getItem('basketData')
+  console.log(basketString);
+  var basketArray = basketString.split(',')
+  //clean array entries
+  for (var i = 0; i < basketArray.length; i++) {
+    basketArray[i] = basketArray[i].replace(/\W/g, '')
+  }
+  console.log(basketArray);
+
 
   return (
-    <div className = {classes.root}>
-    <div className = {classes.wrapper}>
     <Grid>
-    <Card className={classes.card}>
-    <CardMedia className={classes.media} image={backgroundImg} title="My Image"/>
-    </Card>
-    </Grid>
-    </div>
-
-    <Grid container direction="row" alignContent='center' justify="center">
-    <Grid item md={4}>
-    <Card className={classes.card}>
-    <Typography variant="h6" className={classes.title}>
-    List
-    </Typography>
-    <Link to="/productlist">
-    <CardMedia className={classes.media} image={listCardImg} title="My Image"/>
-    </Link>
-    <CardContent>
-    <Typography variant="body1" component="p">
-    Select products while viewing the page as a list of items.
-    </Typography>
-    </CardContent>
-    </Card>
-    </Grid>
-
     <Grid item md={4}>
     <Card className={classes.card}>
     <Typography variant="h6" className={classes.title}>
     Grid
     </Typography>
-    <Link to="/productgrid">
-    <CardMedia className={classes.media} image={gridCardImg} title="My Image"/>
-    </Link>
     <CardContent>
     <Typography variant="body1" component="p">
     Select products while viewing the page as a grid of items.
@@ -87,6 +66,5 @@ export default function Home(){
     </Card>
     </Grid>
     </Grid>
-    </div>
   )
 }

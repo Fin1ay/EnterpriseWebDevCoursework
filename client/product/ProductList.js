@@ -15,6 +15,7 @@ import Divider from '@material-ui/core/Divider'
 import {Link} from 'react-router-dom'
 import {list} from './api-Product.js'
 import auth from './../auth/auth-helper'
+import Button from '@material-ui/core/Button'
 
 
 const useStyles = makeStyles(theme => ({
@@ -30,13 +31,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function Products({ match }) {
   var itemsArray = []
-  window.onbeforeunload=sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
+  //before the window is changed, the basket Data is stored locally in a string.
+  //not functioning, likely due to leaving page using menu bar. Basket button added
+  //to page instead
+  // window.addEventListener('beforeunload', (event) => {
+  //   sessionStorage.setItem('basketData', "HELLO")
+  //   console.log(sessionStorage.getItem('basketData'));
+  // });
+
   const classes = useStyles()
   const [products, setProducts] = useState([])
   const jwt = auth.isAuthenticated()
-
-  const [basket, setBasket] = useState([])
-
   //replace part of string at chosen index
   String.prototype.replaceAt = function(index, replacement) {
       return this.substr(0, index) + replacement;
@@ -70,9 +75,12 @@ export default function Products({ match }) {
     <List dense>
     {products.map((item, i) => {
       return (
+        //when user clicks on product, is added to array of items acting as basket.
         <ListItem button onClick = {()=>{
           var isThere = false;
+          //checks if item is in array
           for (var i=0; i<itemsArray.length; i++){
+            //if item is found, add 1 to quantity at end of number
             if (itemsArray[i].includes(item.name)) {
               isThere = true
                 var pos = item.name.length
@@ -85,6 +93,7 @@ export default function Products({ match }) {
 
             }
           }
+          //if item is not found, add instance as well as "1" to signify quantity
           if (isThere === false) {
             itemsArray.push(item.name+"1")
             console.log(itemsArray);
@@ -99,6 +108,16 @@ export default function Products({ match }) {
         </ListItem>)
       })
     }
+    <Link to="/basket">
+    <Button onClick = {()=>{
+      //sets variables that are available across all pages in session
+      sessionStorage.setItem('basketData', JSON.stringify(itemsArray))
+      sessionStorage.setItem('fromGrid', false)
+      sessionStorage.setItem('fromList', true)
+    }} >
+    Basket </Button>
+    </Link>
+
     </List>
     </Paper>
   )
