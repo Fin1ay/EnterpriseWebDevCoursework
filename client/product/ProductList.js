@@ -13,7 +13,7 @@ import ArrowForward from '@material-ui/icons/ArrowForward'
 import Person from '@material-ui/icons/Person'
 import Divider from '@material-ui/core/Divider'
 import {Link} from 'react-router-dom'
-import {list} from './api-Product.js'
+import {list} from './api-product.js'
 import auth from './../auth/auth-helper'
 import Button from '@material-ui/core/Button'
 
@@ -115,7 +115,7 @@ export default function Products({ match }) {
         sessionStorage.setItem('fromGrid', false)
         sessionStorage.setItem('fromList', true)
       }catch(err){
-        
+
       }
       }} >
       Basket </Button>

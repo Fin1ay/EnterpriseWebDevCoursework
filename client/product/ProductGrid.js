@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import Person from '@material-ui/icons/Person'
-import {list} from './api-Product.js'
+import {list} from './api-product.js'
 // import {list} from './api-Product.js'
 import galaxyA12 from './../assets/images/GalaxyA12.jpg'
 import iPhone11 from './../assets/images/iPhone12.jpg'
@@ -88,7 +88,7 @@ export default function ProductGrid({match}){
   return (
     <Grid container spacing = {0}>
     {products.map((item, i) => {
-      //originally had item.image as a string containing the file location. I 
+      //originally had item.image as a string containing the file location. I
       //believe did not work because
       //the file location is changed to dist folder with random name once imported
       //and converted in server.generated
